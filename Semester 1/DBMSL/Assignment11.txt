@@ -1,0 +1,50 @@
+student> db.createCollection("customers")
+{ ok: 1 }
+student> db.customers.insertMany([{ name: "Pavan Thorat", email: "pavan@gmail.com", contact: 9879435335, age: 21, address: { city: "sinnar", zip: 404115 }, interestCategories: ["Movies", "Mobile", "Shirts"], orders: [{ ordID: 4, prodName: "Movies", quantity: 1, price: 450 }, { ordID: 3, prodName: "Shirt", quantity: 2, price: 190 }] }, { name: "Abhishek Bhosale", email: "abhi@gmail.com", contact: 32131343234, age: 21, address: { city: "Kolhapur", zip: 416101 }, int
+erestCategories: ["Laptop", "Mobile", "Food"], orders: [{ ordID: 4, prodName: "mobile", quantity: 1, price: 15550 }] }])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6545d1b304584bdf3ca212a4"),
+    '1': ObjectId("6545d1b304584bdf3ca212a5")
+  }
+}
+student> db.customers.find().pretty()
+[
+  {
+    _id: ObjectId("6545d1b304584bdf3ca212a4"),
+    name: 'Pavan Thorat',
+    email: 'pavan@gmail.com',
+    contact: 9879435335,
+    age: 21,
+    address: { city: 'sinnar', zip: 404115 },
+    interestCategories: [ 'Movies', 'Mobile', 'Shirts' ],
+    orders: [
+      { ordID: 4, prodName: 'Movies', quantity: 1, price: 450 },
+      { ordID: 3, prodName: 'Shirt', quantity: 2, price: 190 }
+    ]
+  },
+  {
+    _id: ObjectId("6545d1b304584bdf3ca212a5"),
+    name: 'Abhishek Bhosale',
+    email: 'abhi@gmail.com',
+    contact: 32131343234,
+    age: 21,
+    address: { city: 'Kolhapur', zip: 416101 },
+    interestCategories: [ 'Laptop', 'Mobile', 'Food' ],
+    orders: [ { ordID: 4, prodName: 'mobile', quantity: 1, price: 15550 } ]
+  }
+]
+student> var mapfunc = function() {emit(this.age,this.address.zip)}
+
+student> var reducefunc = function (key,values) {return Array.sum(values)}
+
+student> db.customers.mapReduce(mapfunc, reducefunc, {out:myout})
+ReferenceError: myout is not defined
+student> db.customers.mapReduce(mapfunc, reducefunc, {out:"myout"})
+DeprecationWarning: Collection.mapReduce() is deprecated. Use an aggregation instead.
+See https://docs.mongodb.com/manual/core/map-reduce for details.
+{ result: 'myout', ok: 1 }
+student> db.myout.find().pretty()
+[ { _id: 21, value: 820216 } ]
+student>

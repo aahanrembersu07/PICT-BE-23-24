@@ -1,0 +1,397 @@
+student> db.Employee.find().pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 3,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 3,
+    jobtitle: 'CTO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    eid: 4,
+    fname: 'Divyank',
+    lname: 'Sagvekar',
+    officecode: 2,
+    jobtitle: 'Data Analyst'
+  },
+  {
+    _id: ObjectId("65450e1c8794e6913336eee4"),
+    eid: 5,
+    fname: 'Aahan',
+    lname: 'Rembersu',
+    officecode: 3,
+    jobtitle: 'Data Engineer'
+  }
+]
+student> db.Employee.find({officecode:{$not:{$eq:3}}})
+[
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    eid: 4,
+    fname: 'Divyank',
+    lname: 'Sagvekar',
+    officecode: 2,
+    jobtitle: 'Data Analyst'
+  }
+]
+student> db.Employee.update({officecode:3},{$set:{officecode:1}},{multi:true})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+student> db.Employee.find().pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    eid: 4,
+    fname: 'Divyank',
+    lname: 'Sagvekar',
+    officecode: 2,
+    jobtitle: 'Data Analyst'
+  },
+  {
+    _id: ObjectId("65450e1c8794e6913336eee4"),
+    eid: 5,
+    fname: 'Aahan',
+    lname: 'Rembersu',
+    officecode: 1,
+    jobtitle: 'Data Engineer'
+  }
+]
+student> db.Employee.replaceOne({eid:4},{jobtitle:"Data Engineer"})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student> db.Employee.find().pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    jobtitle: 'Data Engineer'
+  },
+  {
+    _id: ObjectId("65450e1c8794e6913336eee4"),
+    eid: 5,
+    fname: 'Aahan',
+    lname: 'Rembersu',
+    officecode: 1,
+    jobtitle: 'Data Engineer'
+  }
+]
+student> db.Employee.replaceOne({eid:4},{jobtitle:"Data Engineer"})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+student> db.Employee.replaceOne({eid:4},{jobtitle:"Data Engineer"})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+student> db.Employee.find().limit(4).pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    jobtitle: 'Data Engineer'
+  }
+]
+student> db.Employee.find().limit(3).pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  }
+]
+student> db.Employee.sort({fname:1}).pretty()
+TypeError: db.Employee.sort is not a function
+student> db.Employee.find().sort({fname:1}).pretty()
+[
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    jobtitle: 'Data Engineer'
+  },
+  {
+    _id: ObjectId("65450e1c8794e6913336eee4"),
+    eid: 5,
+    fname: 'Aahan',
+    lname: 'Rembersu',
+    officecode: 1,
+    jobtitle: 'Data Engineer'
+  },
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  }
+]
+student> db.Employee.find({}).sort({fname:1}).pretty()
+[
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    jobtitle: 'Data Engineer'
+  },
+  {
+    _id: ObjectId("65450e1c8794e6913336eee4"),
+    eid: 5,
+    fname: 'Aahan',
+    lname: 'Rembersu',
+    officecode: 1,
+    jobtitle: 'Data Engineer'
+  },
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  }
+]
+student> db.Employee.deleteOne({eid:5})
+{ acknowledged: true, deletedCount: 1 }
+student> db.Employee.find().pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9743"),
+    jobtitle: 'Data Engineer'
+  }
+]
+student> db.Employee.deleteOne({jobtitle:"Data Engineer"})
+{ acknowledged: true, deletedCount: 1 }
+student> db.Employee.find().pretty()
+[
+  {
+    _id: ObjectId("6543d01158b108ab6a6d9740"),
+    eid: 1,
+    fname: 'Manav',
+    lname: 'Mehta',
+    officecode: 1,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  },
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9742"),
+    eid: 3,
+    fname: 'Varad',
+    lname: 'Pundlik',
+    officecode: 1,
+    jobtitle: 'CTO'
+  }
+]
+student> db.Employee.deleteMany({officecode:1})
+{ acknowledged: true, deletedCount: 2 }
+student> db.Employee.find().pretty()
+[
+  {
+    _id: ObjectId("6543d0bc58b108ab6a6d9741"),
+    eid: 2,
+    fname: 'Rutwik',
+    lname: 'Malav',
+    officecode: 2,
+    jobtitle: 'CEO'
+  }
+]
+student> db.Employee.deleteMany()
+MongoshInvalidInputError: [COMMON-10001] Missing required argument at position 0 (Collection.deleteMany)
+student> db.Employee.deleteMany({})
+{ acknowledged: true, deletedCount: 1 }
+student> db.Employee.find().pretty()
+
+student>
